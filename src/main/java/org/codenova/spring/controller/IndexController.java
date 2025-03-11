@@ -2,6 +2,7 @@ package org.codenova.spring.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 
 
@@ -14,13 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 
     @RequestMapping({"/", "/index"})
-    public void index() {
+    public ModelAndView indexHandle() {
         System.out.println("IndexHandler.index");
+        ModelAndView mav = new ModelAndView("index");
+        mav.addObject("msg", "Hello World");
+        return mav;
     }
 
     @RequestMapping("/help")
-    public void helpHandle() {
+    public String helpHandle() {
         System.out.println("IndexHandler.help");
+        return "help";
     }
 
 
