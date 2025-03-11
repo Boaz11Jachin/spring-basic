@@ -7,7 +7,13 @@
 
     <context:component-scan base-package="org.codenova.spring.controller" />
 
+    <!-- register HandlerMapping -->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" id="handlerMapping" />
+    <!--<bean class="org.codenova.spring.controller.IndexController" id="IndexController"/> 쓸모없어진코드-->
 
-    <!--<bean class="org.codenova.spring.controller.IndexController" id="IndexController"/> -->
+    <!-- register ViewResolver -->
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" id="viewResolver" />
+
+    <bean class="org.codenova.spring.view.IndexView" id="indexView"/>
+
 </beans>
