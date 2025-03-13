@@ -46,7 +46,7 @@ public class StudyController {
     @RequestMapping("/two")
     public String studyTwoHandle(Model model) {
         System.out.println("StudyController.studyTwoHandle()");
-        model.addAttribute("msg", "Hello Spring");
+        model.addAttribute("msg", "Hello Spring"); // req.setAttribute("msg", ????)
 
         return "study/two";
     }

@@ -13,6 +13,12 @@
 </head>
 <body>
     <h2>BMI 측정 결과</h2>
+    <p>
+        분석에 사용한 데이터는 <b>신장 ${param.height }m</b>, <b>${param.weight}kg</b> 입니다.
+    </p>
+    <p>
+        분석에 사용한 데이터는 <b>신장 ${bodyStats.height }m</b>, <b>${bodyStats.weight}kg</b> 입니다.
+    </p>
     <hr/>
     <p>
         BMI 수치는 ${String.format("%.2f",bmi)}입니다
