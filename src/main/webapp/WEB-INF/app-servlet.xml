@@ -3,7 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <context:component-scan base-package="org.codenova.spring"/>
 
@@ -37,5 +38,30 @@
         <property name="username" value="admin" />
         <property name="password" value="1q2w3e4r" />
     </bean>
+
+
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+        <property name="dataSource" ref="dataSource" />
+        <property name="mapperLocations" value="/WEB-INF/mappers/*.xml" />
+        <property name="typeAliasesPackage" value="org.codenova.spring.model" />
+        <property name="configuration" ref="mybatisConfiguration" />
+    </bean>
+
+    <bean class="org.apache.ibatis.session.Configuration" id="mybatisConfiguration" >
+        <property name="mapUnderscoreToCamelCase" value="true" />
+    </bean>
+
+    <bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSessionTemplate" >
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+
+    <bean class="org.codenova.spring.aop.LoggingAspect" id="loggingAspect" />
+
+    <aop:config>
+        <aop:aspect ref="loggingAspect">
+            <aop:after-throwing method="log" pointcut="execution(* org.codenova.spring.controller..*(..))" />
+        </aop:aspect>
+    </aop:config>
+
 
 </beans>
