@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/movie")
 public class MovieController {
 
+
     @Autowired
     private MovieRepository movieRepository;
 
@@ -22,6 +23,11 @@ public class MovieController {
 
         System.out.println("create = " + result);
         return "movie/create-proceed";
+    }
+
+    @RequestMapping("/form")
+    public String movieFormHandle (){
+        return "movie/form";
     }
 
 
